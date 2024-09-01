@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 const uuid = Uuid();
 final formatter =DateFormat.yMd();
 enum Category {
+  none,
   food,
   travel,
   entertainment,
@@ -16,9 +17,15 @@ enum Category {
   savings,
   shopping,
   personalcare,
+  miscellaneous
+,
 }
+enum TransactionType { income, expense }
+
 
 const categoryicons = {
+
+  Category.none:Icons.not_interested_sharp,
   Category.food: Icons.lunch_dining,
   Category.travel: Icons.flight_takeoff,
   Category.entertainment: Icons.movie,
@@ -27,6 +34,7 @@ const categoryicons = {
   Category.savings: Icons.savings, // Savings and deposits
   Category.shopping: Icons.shopping_bag, // Shopping expenses
   Category.personalcare: Icons.spa, // Beauty, grooming, etc.
+  Category.miscellaneous:Icons.help_outline_sharp,
 };
 
 class Expense {
@@ -35,6 +43,7 @@ class Expense {
     required this.amount,
     required this.date,
     required this.category,
+    required this.transtype,
   }): id =uuid.v4();
  
   final String id;
@@ -42,6 +51,7 @@ class Expense {
   final double amount;
   final DateTime date;
   final Category  category;
+  final TransactionType transtype;
   String get formattedDate{return formatter.format(date);}
 }
 class ExpenseBucket{
